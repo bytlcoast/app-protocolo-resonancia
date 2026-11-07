@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocolo Resonancia — Ecosistema Táctico | Enrique Toledo</title>
+  <meta name="description" content="Ecosistema táctico y neurobiológico de reconexión afectiva mediante Recuerdo Inducido. Desarrollado por Enrique Toledo." />
+
+  <!-- Google Fonts: Plus Jakarta Sans (Títulos) & Inter (Cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN + Configuración Exacta de Design Tokens -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F4F7FB',  // Fondo gris azulado claro (secciones de respiro)
+              100: '#E0E8F4',
+              400: '#4B83F3', // Azul de apoyo / hover
+              500: '#2962FF', // Azul brillante (gradientes/destaques)
+              700: '#0B3A82', // Azul Primario Royal (CTAs, Iconos principales, Títulos)
+              900: '#06204A', // Títulos muy oscuros / Contrastes
+            },
+            text: {
+              heading: '#0F172A', // Slate 900 - Títulos oscuros
+              body: '#475569',    // Slate 600 - Textos de párrafos
+              muted: '#94A3B8',   // Slate 400 - Textos desactivados o secundarios
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'Poppins', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -5px rgba(11, 58, 130, 0.08)',
+            'float': '0 20px 40px -10px rgba(11, 58, 130, 0.12)',
+          },
+          borderRadius: {
+            'lg': '0.5rem',   // 8px - Botones estándar
+            'xl': '0.75rem',  // 12px - Botones mayores o pequeños cards
+            '2xl': '1rem',    // 16px - Cards de contenido
+            '3xl': '1.5rem',  // 24px - Paneles grandes y mockups de dashboard
+          },
+          spacing: {
+            '18': '4.5rem',  // 72px
+            '22': '5.5rem',  // 88px
+            '30': '7.5rem',  // 120px - Padding de grandes secciones
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #F4F7FB;
+      color: #475569;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .bg-hero-waves {
+      background-image:
+        radial-gradient(circle at 85% 15%, rgba(41, 98, 255, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 10% 80%, rgba(11, 58, 130, 0.07) 0%, transparent 50%);
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- =====================================================================
+       BARRA DE NAVEGACIÓN SUPERIOR (STICKY GLASSMORPHISM)
+       ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-brand-100 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Identidad de Marca con Iconografía de Escudo Sólido -->
+      <a href="#dashboard" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-soft group-hover:scale-105 transition-all duration-300">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.41 14.59L6.7 11.7l1.41-1.41 2.48 2.48 5.3-5.3 1.41 1.41-6.71 6.71z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="block font-heading font-extrabold text-lg text-text-heading tracking-tight leading-none">
+            PROTOCOLO <span class="text-brand-500">RESONANCIA</span>
+          </span>
+          <span class="block text-[11px] font-semibold text-text-muted uppercase tracking-widest mt-1">
+            Enrique Toledo • Ecosistema Táctico
+          </span>
+        </div>
+      </a>
+
+      <!-- Enlaces de Navegación (Desktop) -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-text-body">
+        <a href="#termometro" class="hover:text-brand-500 transition-colors">1. Termómetro</a>
+        <a href="#seccion-fase-actual" class="hover:text-brand-500 transition-colors">2. Fase Actual</a>
+        <a href="#cofre" class="hover:text-brand-500 transition-colors">3. Cofre Secreto</a>
+        <a href="#presencia-nocturna" class="hover:text-brand-500 transition-colors">4. Presencia 18:00h</a>
+      </nav>
+
+      <!-- Estado de Fase + Botón S.O.S Rápido -->
+      <div class="flex items-center gap-3">
+        <a
+          href="#seccion-fase-actual"
+          id="header-fase-badge"
+          class="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold tracking-wide"
+        >
+          Fase 3 Activa
+        </a>
+        <button
+          onclick="abrirModalSOS()"
+          class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-heading font-bold text-xs uppercase tracking-wider shadow-soft transition-all duration-300 flex items-center gap-1.5"
+        >
+          <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+          S.O.S.
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================================================
+         SECCIÓN 1: DASHBOARD INICIAL (BIENVENIDA DE ENRIQUE TOLEDO)
+         ===================================================================== -->
+    <section id="dashboard" class="py-20 md:py-28 bg-brand-50 bg-hero-waves relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Tarjeta Principal de Bienvenida de Enrique Toledo -->
+        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-float border border-white/80 mb-10">
+          <div class="grid lg:grid-cols-12 gap-8 items-center">
+
+            <!-- Columna Izquierda: Mensaje del Especialista -->
+            <div class="lg:col-span-7">
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-6">
+                <svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Panel de Control Neurobiológico Activo
+              </div>
+
+              <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-text-heading tracking-tight leading-tight mb-5">
+                Bienvenido al <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 to-brand-500">Ecosistema Táctico</span> de Reconexión.
+              </h1>
+
+              <p class="text-base sm:text-lg text-text-body leading-relaxed mb-6">
+                Soy <strong class="text-text-heading font-semibold">Enrique Toledo</strong>. A partir de este minuto, sustituimos la ansiedad, el impulso de madrugada y la improvisación por un <strong class="text-brand-700 font-semibold">proceso matemático y biológico</strong> basado en el <em>Recuerdo Inducido</em>.
+              </p>
+
+              <!-- Cita Táctica del Especialista -->
+              <div class="bg-brand-50 rounded-2xl p-5 border-l-4 border-brand-700 mb-8">
+                <p class="text-sm text-text-heading font-medium leading-relaxed">
+                  "El 92% de los hombres pierden definitivamente a su ex porque le escriben desde su propia urgencia emocional sin medir primero en qué Fase Neurobiológica se encuentra ella hoy. Sigue el orden exacto de este panel."
+                </p>
+                <span class="block text-xs font-bold text-brand-700 uppercase tracking-wider mt-2">
+                  — Enrique Toledo • Especialista en Dinámica Social y Neurobiología
+                </span>
+              </div>
+
+              <!-- CTAs Principales del Dashboard -->
+              <div class="flex flex-wrap items-center gap-4">
+                <a
+                  href="#termometro"
+                  class="px-7 py-4 rounded-xl bg-gradient-to-r from-brand-700 to-brand-500 hover:from-brand-900 hover:to-brand-700 text-white font-heading font-bold text-sm shadow-float transition-all duration-300 flex items-center gap-2"
+                >
+                  Iniciar Diagnóstico en el Termómetro
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </a>
+                <a
+                  href="#cofre"
+                  class="px-6 py-4 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-heading font-semibold text-sm transition-all duration-300"
+                >
+                  Abrir Cofre de Mensajes
+                </a>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Resumen de Estado Actual (LocalStorage Live Card) -->
+            <div class="lg:col-span-5">
+              <div class="bg-brand-50/80 rounded-3xl p-7 border border-brand-100 shadow-soft">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-xs font-bold uppercase tracking-wider text-brand-700">
+                    Telemetría del Caso Actual
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-white text-brand-700 text-xs font-bold border border-brand-100">
+                    LocalStorage Sync
+                  </span>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 shadow-soft border border-slate-100 mb-4">
+                  <span class="text-xs font-semibold text-text-muted block mb-1">Fase Diagnosticada:</span>
+                  <p id="dash-fase-actual" class="font-heading font-extrabold text-xl text-brand-700">
+                    FASE 3: Neutralidad Receptiva
+                  </p>
+                  <p id="dash-fase-descripcion" class="text-xs text-text-body mt-1.5 leading-relaxed">
+                    Instrucción Primaria: Activación de Recuerdo Inducido (Nostalgia Ligera)
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-5">
+                  <div class="bg-white rounded-2xl p-4 border border-slate-100">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted block">Danger Score</span>
+                    <span id="dash-danger-score" class="font-heading font-extrabold text-2xl text-text-heading mt-1 block">42%</span>
+                    <span class="text-[11px] text-emerald-700 font-medium">Riesgo Calculado</span>
+                  </div>
+                  <div class="bg-white rounded-2xl p-4 border border-slate-100">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted block">Horario Óptimo</span>
+                    <span class="font-heading font-extrabold text-2xl text-brand-700 mt-1 block">18:00h+</span>
+                    <span class="text-[11px] text-text-body font-medium">Presencia Nocturna</span>
+                  </div>
+                </div>
+
+                <!-- Personalización Global del Nombre -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/80">
+                  <label for="dash-input-nombre" class="block text-xs font-bold uppercase tracking-wider text-text-heading mb-1.5">
+                    Personalizar Nombre de Ella en los Scripts:
+                  </label>
+                  <input
+                    id="dash-input-nombre"
+                    type="text"
+                    placeholder="Ej: Valeria (Reemplaza [Nombre] automáticamente)"
+                    class="input-nombre-ex w-full px-3.5 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm text-text-heading placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Acceso Rápido a los 4 Módulos Tácticos -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="#termometro" class="bg-white rounded-3xl p-7 shadow-soft hover:shadow-float border border-slate-100 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-700 group-hover:bg-brand-700 group-hover:text-white flex items-center justify-center mb-5 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-500">Módulo 01</span>
+            <h2 class="font-heading font-bold text-lg text-text-heading mt-1 mb-2">Termómetro de 4 Fases</h2>
+            <p class="text-sm text-text-body leading-relaxed">Calcula el Danger Score y diagnostica el estado biológico actual de tu ex.</p>
+          </a>
+
+          <a href="#seccion-fase-actual" class="bg-white rounded-3xl p-7 shadow-soft hover:shadow-float border border-slate-100 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-700 group-hover:bg-brand-700 group-hover:text-white flex items-center justify-center mb-5 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-500">Módulo 02</span>
+            <h2 class="font-heading font-bold text-lg text-text-heading mt-1 mb-2">Panel de Fase Actual</h2>
+            <p class="text-sm text-text-body leading-relaxed">Directrices exactas: Silencio Táctico, Ganchos de Curiosidad o Recuerdo Inducido.</p>
+          </a>
+
+          <a href="#cofre" class="bg-white rounded-3xl p-7 shadow-soft hover:shadow-float border border-slate-100 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-700 group-hover:bg-brand-700 group-hover:text-white flex items-center justify-center mb-5 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-500">Módulo 03</span>
+            <h2 class="font-heading font-bold text-lg text-text-heading mt-1 mb-2">Cofre de Mensajes</h2>
+            <p class="text-sm text-text-body leading-relaxed">Scripts palabra por palabra filtrados por Fase + acceso a La Carta Prohibida.</p>
+          </a>
+
+          <a href="#presencia-nocturna" class="bg-white rounded-3xl p-7 shadow-soft hover:shadow-float border border-slate-100 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-700 group-hover:bg-brand-700 group-hover:text-white flex items-center justify-center mb-5 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-500">Módulo 04</span>
+            <h2 class="font-heading font-bold text-lg text-text-heading mt-1 mb-2">Presencia Nocturna</h2>
+            <p class="text-sm text-text-body leading-relaxed">Sincronización biológica post-18:00h y checklist pre-envío anti-errores.</p>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECCIÓN 2: EL TERMÓMETRO DE LAS 4 FASES (DIAGNÓSTICO NEUROBIOLÓGICO)
+         ===================================================================== -->
+    <section id="termometro" class="py-20 md:py-28 bg-white border-y border-brand-100">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider border border-brand-100 mb-4">
+            Módulo 01 • Diagnóstico Matemático
+          </span>
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-text-heading tracking-tight mb-4">
+            El Termómetro de las 4 Fases Neurobiológicas
+          </h2>
+          <p class="text-base sm:text-lg text-text-body leading-relaxed">
+            Responde con precisión quirúrgica estas 3 variables críticas. El algoritmo calculará tu <strong class="text-text-heading">Danger Score</strong>, definirá en qué Fase (1 a 4) se encuentra ella hoy y liberará la estrategia correspondiente.
+          </p>
+        </div>
+
+        <!-- Contenedor del Formulario del Termómetro -->
+        <div id="termometro-form-wrapper" class="bg-brand-50 rounded-3xl p-6 sm:p-10 border border-brand-100 shadow-float transition-all duration-300">
+          <form id="form-termometro" class="space-y-10">
+
+            <!-- Variable 1: Nivel de Frialdad -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-700 text-white font-heading font-extrabold text-sm flex items-center justify-center">01</span>
+                <h3 class="font-heading font-bold text-lg sm:text-xl text-text-heading">
+                  ¿Cuál es el nivel de frialdad actual en sus respuestas o actitud?
+                </h3>
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4 mt-5">
+                <button
+                  type="button"
+                  data-pregunta="frialdad"
+                  data-valor="5"
+                  onclick="seleccionarOpcionTermometro('frialdad', 5, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Receptiva / Cálida</span>
+                    <span class="block text-xs text-text-body mt-1">Responde rápido, con buena actitud o emojis, aunque aún con cautela.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="frialdad"
+                  data-valor="18"
+                  onclick="seleccionarOpcionTermometro('frialdad', 18, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Educada pero Neutral</span>
+                    <span class="block text-xs text-text-body mt-1">Contesta por cortesía pero no saca tema ni pregunta por ti.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="frialdad"
+                  data-valor="28"
+                  onclick="seleccionarOpcionTermometro('frialdad', 28, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Monosílabos o Deja en Visto</span>
+                    <span class="block text-xs text-text-body mt-1">Respuestas secas ("Ok", "Bien", "Sí"), tarda muchas horas o ignora.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="frialdad"
+                  data-valor="40"
+                  onclick="seleccionarOpcionTermometro('frialdad', 40, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Hostil / Discute / Rechazo Activo</span>
+                    <span class="block text-xs text-text-body mt-1">Cada contacto termina en discusión, reproches o pidió que no le escribas.</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Variable 2: Tiempo desde el último contacto -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-700 text-white font-heading font-extrabold text-sm flex items-center justify-center">02</span>
+                <h3 class="font-heading font-bold text-lg sm:text-xl text-text-heading">
+                  ¿Cuánto tiempo ha pasado desde el último contacto entre ustedes?
+                </h3>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-4 mt-5">
+                <button
+                  type="button"
+                  data-pregunta="tiempo"
+                  data-valor="5"
+                  onclick="seleccionarOpcionTermometro('tiempo', 5, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Más de 21 días</span>
+                    <span class="block text-xs text-text-body mt-1">El cortisol de la ruptura ya tuvo tiempo de descender.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="tiempo"
+                  data-valor="16"
+                  onclick="seleccionarOpcionTermometro('tiempo', 16, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Entre 7 y 21 días</span>
+                    <span class="block text-xs text-text-body mt-1">Fase intermedia de enfriamiento emocional y curiosidad incipiente.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="tiempo"
+                  data-valor="30"
+                  onclick="seleccionarOpcionTermometro('tiempo', 30, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Menos de 24h a 6 días</span>
+                    <span class="block text-xs text-text-body mt-1">Contacto muy reciente (alta saturación si hubo insistencia).</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Variable 3: Estado de Bloqueo en Redes -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-xl bg-brand-700 text-white font-heading font-extrabold text-sm flex items-center justify-center">03</span>
+                <h3 class="font-heading font-bold text-lg sm:text-xl text-text-heading">
+                  ¿Cuál es el estado de bloqueo en WhatsApp y Redes Sociales?
+                </h3>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-4 mt-5">
+                <button
+                  type="button"
+                  data-pregunta="bloqueo"
+                  data-valor="0"
+                  onclick="seleccionarOpcionTermometro('bloqueo', 0, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Sin Bloqueo</span>
+                    <span class="block text-xs text-text-body mt-1">Canales abiertos en WhatsApp e Instagram con normalidad.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="bloqueo"
+                  data-valor="18"
+                  onclick="seleccionarOpcionTermometro('bloqueo', 18, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Bloqueo Parcial / Restricción</span>
+                    <span class="block text-xs text-text-body mt-1">Dejó de seguirte o bloqueó una red, pero WhatsApp u otro canal sigue abierto.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  data-pregunta="bloqueo"
+                  data-valor="30"
+                  onclick="seleccionarOpcionTermometro('bloqueo', 30, this)"
+                  class="p-4 rounded-2xl border border-slate-200 bg-white text-left transition-all duration-300 hover:border-brand-400 flex items-start gap-3"
+                >
+                  <span class="indicador-radio w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 shrink-0"></span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">Bloqueo Total / Severo (&gt;45 días)</span>
+                    <span class="block text-xs text-text-body mt-1">Bloqueo multiplataforma o distancia severa prolongada (Activa Fase 1 Severa).</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Variable 4: Calibración de Ancla Sensorial Dominante -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100">
+              <div class="grid md:grid-cols-2 gap-6 items-center">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wider text-brand-500">Calibración de Memoria Límbica</span>
+                  <h3 class="font-heading font-bold text-lg text-text-heading mt-1">
+                    Selecciona el Ancla Sensorial Dominante de la Relación
+                  </h3>
+                  <p class="text-xs text-text-body mt-1 leading-relaxed">
+                    El Cofre de Mensajes cruzará tu Fase con esta ancla para recomendar el script exacto.
+                  </p>
+                </div>
+                <div>
+                  <select
+                    id="termometro-ancla"
+                    class="w-full px-4 py-3.5 rounded-xl bg-brand-50 border border-brand-100 text-sm font-semibold text-text-heading focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  >
+                    <option value="todas">Todas las Anclas Disponibles (Recomendado)</option>
+                    <option value="comida">🍕 Ancla Gastronómica (Comidas, Restaurantes, Café)</option>
+                    <option value="lugar">📍 Ancla Espacial (Viajes, Lugares, Anécdotas)</option>
+                    <option value="musica">🎵 Ancla Auditiva (Canciones, Series, Películas)</option>
+                    <option value="nombre">⚡ Gatillo de Tensión (Ruptura de Patrón Directa)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Alerta de Validación -->
+            <div id="termometro-error" class="hidden p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-sm font-semibold text-center">
+              ⚠️ Por favor selecciona una opción en cada una de las 3 preguntas antes de ejecutar el diagnóstico.
+            </div>
+
+            <!-- Botón de Ejecución -->
+            <div class="text-center pt-2">
+              <button
+                type="submit"
+                class="w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r from-brand-700 to-brand-500 hover:from-brand-900 hover:to-brand-700 text-white font-heading font-extrabold text-base shadow-float transition-all duration-300"
+              >
+                Calcular Danger Score y Diagnosticar Fase Actual
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Pantalla de Procesamiento Neurobiológico Simulado (2-3 segundos) -->
+        <div id="termometro-loader" class="hidden bg-white rounded-3xl p-12 border border-brand-100 shadow-float text-center transition-all duration-300">
+          <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-700 flex items-center justify-center mx-auto mb-6 animate-pulse">
+            <svg class="w-8 h-8 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+          </div>
+          <h3 class="font-heading font-extrabold text-2xl text-text-heading mb-2">
+            Procesando Telemetría Neurobiológica...
+          </h3>
+          <p id="termometro-loader-text" class="text-sm text-text-body mb-6">
+            Iniciando cálculo de Danger Score y umbral de defensa límbica...
+          </p>
+          <div class="max-w-md mx-auto h-3 bg-brand-50 rounded-full overflow-hidden border border-brand-100">
+            <div id="termometro-loader-bar" class="h-full bg-gradient-to-r from-brand-700 to-brand-500 rounded-full transition-all duration-500" style="width: 15%"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECCIÓN 3: PANEL DE LA FASE ACTUAL (INSTRUCCIONES ESPECÍFICAS)
+         ===================================================================== -->
+    <section id="seccion-fase-actual" class="py-20 md:py-28 bg-brand-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Cabecera + Simulador Rápido de Fases (1 a 4) -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-brand-700 text-xs font-bold uppercase tracking-wider border border-brand-100 mb-3 shadow-soft">
+              Módulo 02 • Directriz Estratégica Activa
+            </span>
+            <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-text-heading tracking-tight">
+              Panel de tu Fase Actual
+            </h2>
+          </div>
+
+          <!-- Conmutador de Inspección de Fase (Guarda en LocalStorage) -->
+          <div class="bg-white p-2 rounded-2xl shadow-soft border border-slate-200/70 flex flex-wrap items-center gap-1.5">
+            <span class="text-xs font-bold text-text-muted px-2.5">Fase Activa:</span>
+            <button onclick="cambiarFaseManual(1)" data-fase="1" class="btn-selector-fase px-4 py-2 rounded-xl text-xs font-semibold">Fase 1</button>
+            <button onclick="cambiarFaseManual(2)" data-fase="2" class="btn-selector-fase px-4 py-2 rounded-xl text-xs font-semibold">Fase 2</button>
+            <button onclick="cambiarFaseManual(3)" data-fase="3" class="btn-selector-fase px-4 py-2 rounded-xl text-xs font-semibold">Fase 3</button>
+            <button onclick="cambiarFaseManual(4)" data-fase="4" class="btn-selector-fase px-4 py-2 rounded-xl text-xs font-semibold">Fase 4</button>
+          </div>
+        </div>
+
+        <!-- Tarjeta Principal de la Fase Diagnosticada -->
+        <div class="bg-white rounded-3xl p-8 md:p-10 shadow-float border border-white mb-8 transition-all duration-300">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-slate-100">
+            <div>
+              <div id="fase-codigo-badge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border bg-blue-50 text-brand-700 border-blue-200">
+                FASE 03 — DESHIELO NEUROBIOLÓGICO
+              </div>
+              <h3 id="fase-titulo" class="font-heading font-extrabold text-2xl sm:text-3xl text-text-heading mt-3">
+                Neutralidad Receptiva & Memoria Episódica
+              </h3>
+              <p id="fase-subtitulo" class="text-base font-semibold text-brand-500 mt-1">
+                Instrucción Primaria: Activación de Recuerdo Inducido (Nostalgia Ligera)
+              </p>
+            </div>
+
+            <!-- Medidor Visual de Danger Score -->
+            <div class="w-full lg:w-72 bg-brand-50 rounded-2xl p-5 border border-brand-100 shrink-0">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-text-heading">Danger Score</span>
+                <span id="fase-danger-score" class="font-heading font-extrabold text-xl text-brand-700">42%</span>
+              </div>
+              <div class="w-full h-3 bg-white rounded-full overflow-hidden border border-brand-100 mb-2">
+                <div id="fase-danger-bar" class="h-3 rounded-full bg-gradient-to-r from-brand-700 to-brand-500 transition-all duration-500" style="width: 42%"></div>
+              </div>
+              <span id="fase-ventana-estado" class="block text-[11px] font-bold uppercase tracking-wider text-text-body">
+                ABIERTA — VENTANA DE RECUERDO INDUCIDO
+              </span>
+            </div>
+          </div>
+
+          <!-- Análisis de Enrique Toledo + Instrucción Táctica -->
+          <div class="grid md:grid-cols-2 gap-6 my-8">
+            <div class="bg-brand-50/70 rounded-2xl p-6 border border-brand-100">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-xl bg-brand-700 text-white flex items-center justify-center font-bold text-xs">ET</span>
+                <h4 class="font-heading font-bold text-sm uppercase tracking-wider text-brand-700">
+                  Qué ocurre en el cerebro de ella ahora:
+                </h4>
+              </div>
+              <p id="fase-neurobiologia" class="text-sm text-text-body leading-relaxed"></p>
+            </div>
+
+            <div class="bg-brand-50/70 rounded-2xl p-6 border border-brand-100">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center font-bold text-xs">⚡</span>
+                <h4 class="font-heading font-bold text-sm uppercase tracking-wider text-brand-700">
+                  Orden Táctica Inmediata:
+                </h4>
+              </div>
+              <p id="fase-instruccion-tactica" class="text-sm text-text-heading font-medium leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Protocolo Verde (Qué Hacer) vs Protocolo Rojo (Qué Evitar) -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="rounded-2xl p-6 bg-emerald-50/50 border border-emerald-200/80">
+              <h4 class="font-heading font-extrabold text-sm uppercase tracking-wider text-emerald-900 mb-4 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                Acciones Obligatorias en esta Fase
+              </h4>
+              <ul id="fase-lista-hacer" class="space-y-3"></ul>
+            </div>
+
+            <div class="rounded-2xl p-6 bg-red-50/50 border border-red-200/80">
+              <h4 class="font-heading font-extrabold text-sm uppercase tracking-wider text-red-900 mb-4 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>
+                Errores Fatales (Prohibido en esta Fase)
+              </h4>
+              <ul id="fase-lista-evitar" class="space-y-3"></ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECCIÓN 4: COFRE DE MENSAJES (BÓVEDA DINÁMICA + CARTA PROHIBIDA)
+         ===================================================================== -->
+    <section id="cofre" class="py-20 md:py-28 bg-white border-t border-brand-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div>
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider border border-brand-100 mb-3">
+              Módulo 03 • Scripts de Precisión Límbica
+            </span>
+            <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-text-heading tracking-tight">
+              Cofre Secreto de Mensajes
+            </h2>
+            <p id="cofre-fase-indicador" class="text-sm font-bold text-brand-500 mt-2">
+              Mostrando scripts calibrados para tu Fase actual
+            </p>
+          </div>
+
+          <!-- Personalizador Rápido de Nombre en el Cofre -->
+          <div class="w-full lg:w-80">
+            <label for="cofre-input-nombre" class="block text-xs font-bold uppercase tracking-wider text-text-heading mb-1.5">
+              Nombre de tu Ex (Inyección Dinámica):
+            </label>
+            <input
+              id="cofre-input-nombre"
+              type="text"
+              placeholder="Escribe su nombre aquí..."
+              class="input-nombre-ex w-full px-4 py-3 rounded-xl bg-brand-50 border border-brand-100 text-sm text-text-heading placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand-500"
+            />
+          </div>
+        </div>
+
+        <!-- Filtros de Ancla Sensorial -->
+        <div class="flex flex-wrap items-center gap-2.5 mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-text-muted mr-2">Filtrar por Ancla:</span>
+          <button onclick="filtrarAnclaCofre('todas')" data-ancla="todas" class="btn-ancla-filtro">Todas las Anclas</button>
+          <button onclick="filtrarAnclaCofre('comida')" data-ancla="comida" class="btn-ancla-filtro">🍕 Comida / Café</button>
+          <button onclick="filtrarAnclaCofre('lugar')" data-ancla="lugar" class="btn-ancla-filtro">📍 Lugar / Viaje</button>
+          <button onclick="filtrarAnclaCofre('musica')" data-ancla="musica" class="btn-ancla-filtro">🎵 Música / Serie</button>
+          <button onclick="filtrarAnclaCofre('nombre')" data-ancla="nombre" class="btn-ancla-filtro">⚡ Gatillo del Nombre</button>
+        </div>
+
+        <!-- Grid Dinámico de Scripts Recomendados para la Fase Actual -->
+        <div id="cofre-mensajes-grid" class="grid md:grid-cols-2 gap-8 mb-12"></div>
+
+        <!-- Pestaña / Sección Especial: "La Carta Prohibida" (Fase 1 Severa) -->
+        <div id="cofre-carta-prohibida-box" class="mt-8"></div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECCIÓN 5: PROTOCOLO DE PRESENCIA NOCTURNA (SECCIÓN FIJA POST 18:00H)
+         ===================================================================== -->
+    <section id="presencia-nocturna" class="py-20 md:py-28 bg-brand-50 border-t border-brand-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-float border border-white">
+          <div class="grid lg:grid-cols-12 gap-10 items-start">
+
+            <!-- Explicación Neurobiológica + Reloj en Tiempo Real -->
+            <div class="lg:col-span-6">
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-900 text-white text-xs font-bold uppercase tracking-wider mb-5">
+                <span>🌙 Módulo 04 • Sincronización Circadiana</span>
+              </div>
+
+              <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-text-heading tracking-tight mb-4">
+                Protocolo de Presencia Nocturna (Post 18:00h)
+              </h2>
+
+              <p class="text-base text-text-body leading-relaxed mb-6">
+                Enrique Toledo descubrió que el <strong class="text-text-heading">mismo mensaje enviado a las 11:30 AM puede ser ignorado</strong>, mientras que enviado <strong class="text-brand-700">después de las 18:00h</strong> multiplica por 3.4x la tasa de respuesta cálida.
+              </p>
+
+              <!-- Tarjeta del Reloj Biométrico en Vivo -->
+              <div class="bg-brand-50 rounded-3xl p-6 border border-brand-100 mb-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-3">
+                  <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-text-muted block">Reloj Táctico Local</span>
+                    <span id="reloj-nocturno-hora" class="font-heading font-extrabold text-3xl text-brand-700">18:00h</span>
+                  </div>
+                  <div id="reloj-nocturno-estado"></div>
+                </div>
+                <p id="reloj-nocturno-detalle" class="text-xs text-text-body leading-relaxed"></p>
+              </div>
+
+              <!-- Los 3 Pilares Biológicos de las 18:00h -->
+              <div class="space-y-4">
+                <div class="flex items-start gap-3.5">
+                  <div class="w-8 h-8 rounded-xl bg-brand-50 text-brand-700 font-heading font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+                  <div>
+                    <h4 class="font-heading font-bold text-sm text-text-heading">Fatiga del Escudo Prefrontal</h4>
+                    <p class="text-xs text-text-body leading-relaxed mt-0.5">Tras las 18:00h, su cerebro racional está agotado de tomar decisiones laborales. Su barrera lógica contra ti baja al mínimo del día.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3.5">
+                  <div class="w-8 h-8 rounded-xl bg-brand-50 text-brand-700 font-heading font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+                  <div>
+                    <h4 class="font-heading font-bold text-sm text-text-heading">Vacío de Dopamina Vespertino</h4>
+                    <p class="text-xs text-text-body leading-relaxed mt-0.5">Al caer la tarde y llegar a casa, el silencio activa la memoria episódica. Un <em>Recuerdo Inducido</em> entra sin fricción en su mente.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3.5">
+                  <div class="w-8 h-8 rounded-xl bg-brand-50 text-brand-700 font-heading font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+                  <div>
+                    <h4 class="font-heading font-bold text-sm text-text-heading">Efecto de Incubación del Sueño</h4>
+                    <p class="text-xs text-text-body leading-relaxed mt-0.5">Si generas una sonrisa o intriga entre las 18:00h y las 21:30h y luego te retiras, eres el último estímulo que su hipocampo consolida al dormir.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Checklist Interactivo "Listo para Enviar" -->
+            <div class="lg:col-span-6 bg-brand-50/70 rounded-3xl p-6 sm:p-8 border border-brand-100">
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <div>
+                  <h3 class="font-heading font-extrabold text-xl text-text-heading">
+                    Checklist Táctico "Listo para Enviar"
+                  </h3>
+                  <p class="text-xs text-text-body mt-1">
+                    Verifica estos 4 puntos antes de copiar y disparar cualquier script del Cofre.
+                  </p>
+                </div>
+                <div id="checklist-status-badge"></div>
+              </div>
+
+              <div class="space-y-3.5">
+                <button
+                  type="button"
+                  id="check-nocturno-0"
+                  onclick="toggleCheckNocturno(0)"
+                  class="w-full p-4 rounded-2xl border border-slate-200 bg-white text-left flex items-center gap-4 transition-all duration-300 hover:border-brand-400"
+                >
+                  <span id="check-box-0" class="w-6 h-6 rounded-lg border-2 border-slate-300 flex items-center justify-center">✓</span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">1. Sincronización Horaria (Post 18:00h)</span>
+                    <span class="block text-xs text-text-body mt-0.5">Confirmo que son pasadas las 18:00h (o antes de las 22:30h) y no estoy escribiendo de madrugada.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  id="check-nocturno-1"
+                  onclick="toggleCheckNocturno(1)"
+                  class="w-full p-4 rounded-2xl border border-slate-200 bg-white text-left flex items-center gap-4 transition-all duration-300 hover:border-brand-400"
+                >
+                  <span id="check-box-1" class="w-6 h-6 rounded-lg border-2 border-slate-300 flex items-center justify-center">✓</span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">2. Compatibilidad de Fase Confirmada</span>
+                    <span class="block text-xs text-text-body mt-0.5">El script elegido pertenece estrictamente a la Fase que arrojó mi Termómetro.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  id="check-nocturno-2"
+                  onclick="toggleCheckNocturno(2)"
+                  class="w-full p-4 rounded-2xl border border-slate-200 bg-white text-left flex items-center gap-4 transition-all duration-300 hover:border-brand-400"
+                >
+                  <span id="check-box-2" class="w-6 h-6 rounded-lg border-2 border-slate-300 flex items-center justify-center">✓</span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">3. Cero Modificaciones Emocionales</span>
+                    <span class="block text-xs text-text-body mt-0.5">No agregué frases como "te extraño", "espero no molestarte" ni reclamos ocultos.</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  id="check-nocturno-3"
+                  onclick="toggleCheckNocturno(3)"
+                  class="w-full p-4 rounded-2xl border border-slate-200 bg-white text-left flex items-center gap-4 transition-all duration-300 hover:border-brand-400"
+                >
+                  <span id="check-box-3" class="w-6 h-6 rounded-lg border-2 border-slate-300 flex items-center justify-center">✓</span>
+                  <div>
+                    <span class="block font-heading font-bold text-sm text-text-heading">4. Plan de Retirada Post-Envío</span>
+                    <span class="block text-xs text-text-body mt-0.5">Una vez enviado el mensaje, dejaré el teléfono lejos por al menos 45 minutos sin revisar su "en línea".</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       PIE DE PÁGINA
+       ===================================================================== -->
+  <footer class="bg-brand-900 text-white py-12 border-t border-brand-700/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-brand-500 flex items-center justify-center text-white font-heading font-extrabold">
+          PR
+        </div>
+        <div>
+          <span class="font-heading font-bold text-sm block">Protocolo Resonancia — Enrique Toledo</span>
+          <span class="text-xs text-slate-400 block">Ecosistema Táctico Zero-Backend • Progreso guardado en tu navegador</span>
+        </div>
+      </div>
+      <div class="text-xs text-slate-400">
+        Uso exclusivo para miembros del programa • Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       BOTÓN DE EMERGENCIA S.O.S. FLOTANTE (GLOBAL)
+       ===================================================================== -->
+  <button
+    onclick="abrirModalSOS()"
+    aria-label="Abrir Botón de Emergencia S.O.S."
+    class="fixed bottom-6 right-6 z-40 px-6 py-4 rounded-full bg-gradient-to-r from-red-600 via-red-600 to-brand-900 hover:scale-105 text-white font-heading font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-float transition-all duration-300 flex items-center gap-3 border-2 border-white/90"
+  >
+    <span class="relative flex h-3 w-3">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-200 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+    </span>
+    <span>🚨 S.O.S. EMERGENCIA TÁCTICA</span>
+  </button>
+
+  <!-- =====================================================================
+       MODAL GLOBAL S.O.S. (INTERRUPCIÓN DE IMPULSO + 4 ESCENARIOS RÁPIDOS)
+       ===================================================================== -->
+  <div
+    id="modal-sos"
+    class="hidden opacity-0 fixed inset-0 z-50 bg-brand-900/80 backdrop-blur-md overflow-y-auto transition-all duration-300 p-4 sm:p-6 md:p-10"
+  >
+    <div class="max-w-5xl mx-auto bg-brand-50 rounded-3xl shadow-float border border-white overflow-hidden my-4">
+
+      <!-- Cabecera del Modal S.O.S. -->
+      <div class="bg-gradient-to-r from-brand-900 via-brand-700 to-red-800 text-white p-6 sm:p-8 flex items-start justify-between gap-4">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-extrabold uppercase tracking-wider mb-3">
+            🛑 PROTOCOLO DE INTERRUPCIÓN DE IMPULSO
+          </span>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl leading-tight">
+            ¡ALTO! No envíes ningún mensaje por impulso ahora mismo.
+          </h2>
+          <p class="text-sm text-blue-100 mt-2 max-w-2xl leading-relaxed">
+            "Un solo mensaje enviado desde el miedo o los celos destruye semanas de progreso neurobiológico. Respira conmigo 30 segundos y usa uno de los 4 escenarios blindados de abajo." — <strong>Enrique Toledo</strong>
+          </p>
+        </div>
+
+        <button
+          onclick="cerrarModalSOS()"
+          class="w-10 h-10 rounded-2xl bg-white/15 hover:bg-white/25 text-white flex items-center justify-center shrink-0 transition-colors"
+          aria-label="Cerrar modal S.O.S."
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Cuerpo del Modal S.O.S. -->
+      <div class="p-6 sm:p-8">
+
+        <!-- Respirador Neuro-Vagal Interactivo -->
+        <div class="bg-white rounded-3xl p-5 sm:p-6 border border-brand-100 shadow-soft mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div id="sos-breath-circle" class="w-14 h-14 rounded-2xl bg-brand-700 text-white flex items-center justify-center font-heading font-extrabold text-sm shrink-0">
+              4-7-8
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">
+                Freno Vagal de Cortisol en Vivo
+              </span>
+              <p id="sos-breath-text" class="font-heading font-extrabold text-base sm:text-lg text-text-heading">
+                INHALA PROFUNDO POR LA NARIZ (4s)...
+              </p>
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-text-muted">
+            Completa 3 respiraciones antes de tocar WhatsApp
+          </span>
+        </div>
+
+        <!-- Los 4 Escenarios Listos de Respuestas Rápidas -->
+        <div class="mb-6">
+          <h3 class="font-heading font-extrabold text-xl text-text-heading mb-1">
+            4 Escenarios de Emergencia — Respuestas Rápidas Blindadas
+          </h3>
+          <p class="text-xs sm:text-sm text-text-body">
+            Identifica qué acaba de ocurrir y copia la respuesta exacta diseñada para proteger tu marco de alto valor:
+          </p>
+        </div>
+
+        <div id="sos-escenarios-grid" class="grid md:grid-cols-2 gap-6"></div>
+
+        <!-- Pie del Modal -->
+        <div class="mt-8 pt-6 border-t border-brand-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-xs text-text-body">
+            💡 <strong>Consejo de Enrique Toledo:</strong> Ante la duda, el silencio nunca te hace perder valor; la reactividad sí.
+          </p>
+          <button
+            onclick="cerrarModalSOS()"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-900 hover:bg-brand-700 text-white font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300"
+          >
+            He recuperado el control • Volver al Panel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       TOAST FLOTANTE DE NOTIFICACIÓN
+       ===================================================================== -->
+  <div
+    id="toast-notificacion"
+    class="fixed bottom-24 right-6 z-50 bg-brand-900 text-white px-5 py-3.5 rounded-2xl shadow-float border border-brand-400/30 flex items-center gap-3 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300"
+  >
+    <span class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+    <span id="toast-texto" class="text-xs sm:text-sm font-semibold">Acción completada</span>
+  </div>
+
+  <!-- Lógica Modular de la Aplicación -->
+  <script src="app.js"></script>
+</body>
+</html>
+

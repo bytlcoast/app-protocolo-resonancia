@@ -1,0 +1,112 @@
+{
+  "cofre_mensajes": [
+    {
+      "id": "recuerdo_nostalgia_1",
+      "tipo": "Recuerdo Inducido",
+      "ancla": "comida",
+      "titulo": "La Pizza Incomible",
+      "fase_recomendada": [3, 4],
+      "texto": "¿Te acuerdas de aquella pizza rara que pedimos ese fin de semana y nadie pudo comérsela de lo mala que estaba? Me acordé hoy de la nada y me reí solo. ¿Cómo estás?",
+      "objetivo": "Arranca una sonrisa instantánea sin cargar peso romántico ni generar presión. Desarma su escudo defensivo."
+    },
+    {
+      "id": "loop_curiosidad_1",
+      "tipo": "Estímulo Sensorial",
+      "ancla": "nombre",
+      "titulo": "El Gatillo del Nombre (Máxima Tensión)",
+      "fase_recomendada": [2],
+      "texto": "¿[Nombre]?",
+      "objetivo": "Rompe todos los patrones. Al enviar solo su nombre por la mañana y desaparecer, su mente pasa horas intentando adivinar el motivo."
+    },
+    {
+      "id": "carta_prohibida_sos",
+      "tipo": "Artillería Pesada",
+      "ancla": "artilleria",
+      "titulo": "La Carta Prohibida",
+      "fase_recomendada": [1],
+      "condicion_especial": "Bloqueo total por más de 45 días",
+      "texto": "Hola [Nombre], ¿cómo estás? Sabes, he estado reflexionando bastante en estos últimos tiempos sobre nosotros... Entiendo perfectamente por qué tomaste distancia y hoy te escribo sin ninguna intención de presionarte ni de pedirte que cambiemos lo que pasó. Al contrario, quería agradecerte por lo bueno que compartimos y decirte que respeto tu tranquilidad al 100%. Te deseo de corazón lo mejor en esta etapa.",
+      "objetivo": "Rompe de golpe cualquier expectativa de reclamo o súplica. Valida su decisión y desploma su resistencia."
+    },
+    {
+      "id": "loop_curiosidad_2",
+      "tipo": "Estímulo Sensorial",
+      "ancla": "lugar",
+      "titulo": "El Micro-Destello Espacial (Circuito Abierto)",
+      "fase_recomendada": [2],
+      "texto": "Hoy pasé por aquel lugar del que hablamos una vez y tenían razón en algo que dijiste. No te imaginas lo que vi...",
+      "objetivo": "Activa un vacío de información (Efecto Zeigarnik) validando su criterio sin revelar el desenlace. Obliga a su cerebro a preguntar qué pasó."
+    },
+    {
+      "id": "loop_curiosidad_3",
+      "tipo": "Estímulo Sensorial",
+      "ancla": "musica",
+      "titulo": "La Consulta de Experta (Cero Presión)",
+      "fase_recomendada": [2],
+      "texto": "Hola [Nombre], pregunta rápida de 10 segundos: ¿cómo se llamaba aquella canción/serie que me recomendaste hace meses? Me salió el tema hoy y me quedé con la duda.",
+      "objetivo": "Posiciona el contacto como algo funcional, breve y con límite de tiempo. Elimina el miedo a una conversación emocional pesada."
+    },
+    {
+      "id": "recuerdo_nostalgia_2",
+      "tipo": "Recuerdo Inducido",
+      "ancla": "lugar",
+      "titulo": "El Ancla del Viaje Caótico",
+      "fase_recomendada": [3, 4],
+      "texto": "Hola [Nombre], hoy vi una foto de un lugar idéntico a donde casi nos perdemos aquella vez y fue inevitable acordarme de tu cara en ese momento jajaja. Espero que todo vaya muy bien en tu semana.",
+      "objetivo": "Evoca una memoria episódica compartida de complicidad y aventura sin exigir respuesta inmediata."
+    },
+    {
+      "id": "recuerdo_nostalgia_3",
+      "tipo": "Recuerdo Inducido",
+      "ancla": "musica",
+      "titulo": "El Eco Auditivo Involuntario",
+      "fase_recomendada": [3, 4],
+      "texto": "Entré a un café hace un rato y estaba sonando exactamente ese tema que ponías siempre en el auto. Me pareció demasiada casualidad. ¿Cómo va todo por allá, [Nombre]?",
+      "objetivo": "Utiliza el córtex auditivo como puente directo a la memoria límbica positiva, generando calidez instantánea."
+    },
+    {
+      "id": "reconexion_fase4_1",
+      "tipo": "Puente Presencial",
+      "ancla": "comida",
+      "titulo": "La Invitación de Baja Fricción (Café de 20 Minutos)",
+      "fase_recomendada": [4],
+      "texto": "Oye [Nombre], el jueves voy a estar cerca de tu zona haciendo un trámite por la tarde. Paso por un café rápido a las 18:30, ¿te sumas 20 minutos y me cuentas qué tal va tu vida sin drama?",
+      "objetivo": "En Fase 4 de apertura, transforma la resonancia digital en presencia física con límite de tiempo para anular cualquier resistencia."
+    }
+  ],
+  "escenarios_sos": [
+    {
+      "id": "sos_frialdad",
+      "numero": "01",
+      "titulo": "Me respondió con monosílabos o extrema frialdad",
+      "diagnostico": "Su amígdala está midiendo si vas a reclamar atención. Si escribes otro mensaje o preguntas '¿te pasa algo?', pierdes el marco al instante.",
+      "accion_inmediata": "NO respondas de inmediato. Espera mínimo 4 horas o deja su monosílabo en visto con total serenidad. Si necesitas cerrar la interacción, usa este espejo neutro:",
+      "script_respuesta": "Perfecto [Nombre], ¡hablamos luego! Que tengas buena noche."
+    },
+    {
+      "id": "sos_celos_redes",
+      "numero": "02",
+      "titulo": "Subió una indirecta o foto de fiesta / con alguien más",
+      "diagnostico": "Es un test de reactividad neurobiológica (consciente o inconsciente). Si reaccionas, comentas o muestras celos, confirmas que sigues bajo su control emocional.",
+      "accion_inmediata": "PROHIBIDO ver sus siguientes historias por 48 horas. Silencia sus historias ahora mismo. Si ella te escribe directo para tantear tu reacción, responde con calma imperturbable:",
+      "script_respuesta": "Todo excelente por aquí [Nombre], estuve bastante desconectado del teléfono este fin de semana con unos proyectos. ¿Qué tal tú?"
+    },
+    {
+      "id": "sos_reclamo_pasado",
+      "numero": "03",
+      "titulo": "Sacó un reproche del pasado o quiere iniciar una pelea",
+      "diagnostico": "Busca justificar racionalmente la ruptura provocándote una reacción defensiva. Si te defiendes o discutes, reactivas el ciclo de rechazo.",
+      "accion_inmediata": "Aplica Aikido Verbal: absorbe el golpe validando su percepción sin humillarte ni abrir debate.",
+      "script_respuesta": "Entiendo por qué lo viste de esa forma en su momento, [Nombre]. Hoy prefiero quedarme con lo que aprendimos y no entrar en discusiones que no nos suman a ninguno de los dos."
+    },
+    {
+      "id": "sos_ansiedad_nocturna",
+      "numero": "04",
+      "titulo": "Urgencia nocturna de escribirle 'Te extraño' o pedir explicaciones",
+      "diagnostico": "Después de las 22:30h tu corteza prefrontal está agotada y tu dopamina en abstinencia te empuja al autosabotaje. Enviar un mensaje emocional ahora reinicia tu proceso a CERO.",
+      "accion_inmediata": "Deja el teléfono en otra habitación durante 20 minutos y activa el respirador táctico de arriba. Si ella te escribió algo ambiguo a medianoche, responde recién mañana a las 18:15h:",
+      "script_respuesta": "Hola [Nombre], ayer me quedé dormido temprano y recién veo tu mensaje. ¿Todo bien?"
+    }
+  ]
+}
+
