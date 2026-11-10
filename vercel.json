@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/dashboard/bonos",
+      "destination": "/dashboard/bonos/index.html"
+    },
+    {
+      "source": "/bonos",
+      "destination": "/dashboard/bonos/index.html"
+    }
+  ]
+}
